@@ -45,36 +45,81 @@ public class RoadMap {
     //evaluate horizontal position, if less, move right, if more, move left
     //evaluate vertical position, move down/move up
     //return the number of steps
-    public int move(int destr, int destc){
+    public void move(int startr, int startc, int destr, int destc){
         int counter = 0;
         boolean finished = false;
 
-        while(!finished) {
-            for (int r = 0; r < rows; r++) {
+        //increment destination
+        //decrement start
+        int curr = map[destr][destc];
+        map[destr][destc] = curr+1;
+
+        curr = map[startr][startc];
+        map[startr][startc] = curr-1;
+
+
+        /**
+        for (int r = 0; r < rows; r++) {
                 for (int c = 0; c < columns; c++) {
                     if (map[r][c] != 0) { //if the intersection is currently occupied by a car
-                        if (destc > c) {
-                            counter += (destc - c);
-                        }
-                        if (destr > r) {
-                            counter += (destr - r);
-                        }
 
-                        if (destc < c) {
-                            counter += (c - destc);
-                        }
+                        //increment destination
+                        //decrement start
+                        int curr = map[destr][destc];
+                        map[destr][destc] = curr+1;
 
-                        if (destr < r) {
-                            counter += (r - destr);
-                        }
-                        map[destr][destc] = 1;
-                        finished = true;
+                        curr = map[r][c];
+                        map[r][c] = curr-1;
+
+
                     }
                 }
             }
+         */
+
+    }
+
+    private int evaluateDistance(int startr, int startc, int destr, int destc){
+        int counter = 0;
+
+        if(startr > destr){
+            counter += (startr - destr);
+        }
+
+        if(destr > startr){
+            counter += (destr - startr);
+        }
+
+        if(destc > startc){
+            counter += (destc - startc);
+        }
+
+        if(startc > destc){
+            counter += (startc - destc);
         }
 
         return counter;
+
+    }
+
+    private void evaluateCar(int destr, int destc) {
+        int distance = 0;
+
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columns; c++) {
+                if (map[r][c] != 0) { //if the intersection is currently occupied by a car
+
+                    int newDistance = evaluateDistance(r,c,destr,destc);
+
+                    if (newDistance < distance){
+                        distance = newDistance;
+                    }
+
+
+                }
+            }
+        }
     }
 
 }

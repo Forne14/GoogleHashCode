@@ -13,13 +13,10 @@ public class Main {
         map.populate();
         map.printMap();
 
-        System.out.println(map.move(1,3));
+        map.move(0,0,1,3);
 
         System.out.println();
         map.printMap();
-
-
-
 
 
     }
