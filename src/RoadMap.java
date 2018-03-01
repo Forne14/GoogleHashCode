@@ -6,11 +6,16 @@ public class RoadMap {
     private InputParser inputParser;
 
 
+    private static int counter;
+
+
     public RoadMap(InputParser inputParser){
        this.inputParser = inputParser;
        rows = inputParser.getRows();
        columns = inputParser.getColumns();
        map = new int[rows][columns];
+
+       counter = 0;
     }
 
 
@@ -103,7 +108,9 @@ public class RoadMap {
     }
 
     private void evaluateCar(int destr, int destc) {
-        int distance = 0;
+        int distance = 100000;
+        int smallestr = 0;
+        int smallestc = 0;
 
 
         for (int r = 0; r < rows; r++) {
@@ -116,10 +123,24 @@ public class RoadMap {
                         distance = newDistance;
                     }
 
+                    smallestc = c;
+                    smallestr = r;
+
 
                 }
             }
         }
+
+        move(smallestr,smallestc,destr,destc);
+        incrementSteps(evaluateDistance(smallestr,smallestc,destr,destc));
+    }
+
+    public void incrementSteps(int steps){
+        counter += steps;
+    }
+
+    public int getSteps(){
+        return counter;
     }
 
 }

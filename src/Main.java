@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 
 public class Main {
 
-    private static int counter = 0;
 
     public static void main(String[] args) throws FileNotFoundException{
         InputParser parser = new InputParser(new File("a_example.in"));
