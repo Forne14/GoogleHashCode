@@ -11,14 +11,12 @@ public class Main {
         RoadMap map = new RoadMap(parser);
         map.populate();
         map.printMap();
-
-        map.move(0,0,1,3);
-
-        System.out.println();
+        map.ride(parser.getInput());
         map.printMap();
-
-
     }
+
+
+
 
 
 }

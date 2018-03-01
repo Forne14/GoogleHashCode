@@ -7,6 +7,7 @@ public class RoadMap {
 
 
     private static int counter;
+    private static int points;
 
 
     public RoadMap(InputParser inputParser){
@@ -29,7 +30,7 @@ public class RoadMap {
                 }
             }
 
-        map[0][0] = 1;
+        map[0][0] = inputParser.getNumRides();
 
         }
 
@@ -62,26 +63,6 @@ public class RoadMap {
         curr = map[startr][startc];
         map[startr][startc] = curr-1;
 
-
-        /**
-        for (int r = 0; r < rows; r++) {
-                for (int c = 0; c < columns; c++) {
-                    if (map[r][c] != 0) { //if the intersection is currently occupied by a car
-
-                        //increment destination
-                        //decrement start
-                        int curr = map[destr][destc];
-                        map[destr][destc] = curr+1;
-
-                        curr = map[r][c];
-                        map[r][c] = curr-1;
-
-
-                    }
-                }
-            }
-         */
-
     }
 
     private int evaluateDistance(int startr, int startc, int destr, int destc){
@@ -107,7 +88,8 @@ public class RoadMap {
 
     }
 
-    private void evaluateCar(int destr, int destc) {
+    public int pickCar(int destr, int destc) {
+
         int distance = 100000;
         int smallestr = 0;
         int smallestc = 0;
@@ -133,6 +115,8 @@ public class RoadMap {
 
         move(smallestr,smallestc,destr,destc);
         incrementSteps(evaluateDistance(smallestr,smallestc,destr,destc));
+
+        return distance;
     }
 
     public void incrementSteps(int steps){
@@ -143,4 +127,13 @@ public class RoadMap {
         return counter;
     }
 
+    public void ride(String[] rides){
+        for(int i = 0; i < rides.length; i=i+6){
+            if(counter > Integer.parseInt(rides[i+4])){
+            pickCar(Integer.parseInt(rides[i]), Integer.parseInt(rides[i+1]));
+            pickCar(Integer.parseInt(rides[i+2]), Integer.parseInt(rides[i+3]));
+            }
+        }
+
+    }
 }
