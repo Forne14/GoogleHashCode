@@ -40,4 +40,41 @@ public class RoadMap {
         }
     }
 
+
+    //evaluate current position
+    //evaluate horizontal position, if less, move right, if more, move left
+    //evaluate vertical position, move down/move up
+    //return the number of steps
+    public int move(int destr, int destc){
+        int counter = 0;
+        boolean finished = false;
+
+        while(!finished) {
+            for (int r = 0; r < rows; r++) {
+                for (int c = 0; c < columns; c++) {
+                    if (map[r][c] != 0) { //if the intersection is currently occupied by a car
+                        if (destc > c) {
+                            counter += (destc - c);
+                        }
+                        if (destr > r) {
+                            counter += (destr - r);
+                        }
+
+                        if (destc < c) {
+                            counter += (c - destc);
+                        }
+
+                        if (destr < r) {
+                            counter += (r - destr);
+                        }
+                        map[destr][destc] = 1;
+                        finished = true;
+                    }
+                }
+            }
+        }
+
+        return counter;
+    }
+
 }

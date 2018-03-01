@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 
 public class Main {
 
+    private static int counter = 0;
 
     public static void main(String[] args) throws FileNotFoundException{
         InputParser parser = new InputParser(new File("a_example.in"));
@@ -12,19 +13,16 @@ public class Main {
         map.populate();
         map.printMap();
 
+        System.out.println(map.move(1,3));
+
+        System.out.println();
+        map.printMap();
 
 
-    }
 
-    //evaluate current position
-//evaluate horizontal position, if less, move right, if more, move left
-//evaluate vertical position, move down/move up
-    public void move(){
 
-    }
-
-    public void populate(){
 
     }
+
 
 }
